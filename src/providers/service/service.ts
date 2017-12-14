@@ -12,20 +12,17 @@ import { Subscriber } from 'rxjs/Subscriber';
 */
 @Injectable()
 export class ServiceProvider {
-
-  private items: User[];
+  baseUrl : string ="http://localhost:3000/user";
 
   constructor(public http: HttpClient) {
     console.log('Hello ServiceProvider Provider');
   }
 
-  getItems(): User[] {
-   this.items = [
-    {id:1,name:'Pokémon',prenom:'Yellow', adr:'region kanto',tel:'0254862',email:'pokemonYellow@poke.fr',image:'../../assets/imgs/pokemon.jpg'},
-    {id:2,name:'Super',prenom:'Mario',adr:'Galaxy etoiles',tel:'4584126',email:'superMario@mitendo.gr',image:'../../assets/imgs/mario.jpg'},
-    {id:3,name:'Pac',prenom:'Man',adr:'labirynthe fantome',tel:'5147852',email:'pacman@jeu.ku',image:'../../assets/imgs/pacman.jpg'}
-  ];
-  return this.items;
-  }
+  getAllUser(): Observable<User[]>{
+    return this.http.get<User[]>(this.baseUrl);
+}
+  
 
+  
+  
 }
